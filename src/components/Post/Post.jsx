@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { BsBookmarkStar } from "react-icons/bs";
-const Post = ({post, handleBookmarks, handleTime}) => {
-    const {blog_tags,blog_title,reading_time, cover_photo, author_post_date, author_name, author_image} = post;
+const Post = ({post, handleBookmarks, handleTime,handleModify}) => {
+    const {id,blog_tags,blog_title,reading_time, cover_photo, author_post_date, author_name, author_image} = post;
     return (
         <div className='space-y-4 ml-10 md:ml-4 lg:ml-0'>
             <img className='rounded-lg' src={cover_photo} alt="" />
@@ -15,7 +15,7 @@ const Post = ({post, handleBookmarks, handleTime}) => {
                 </div>
                 <div className=' flex gap-4 items-center text-lg'>
                     <h1>{reading_time} Min Read</h1>
-                    <button onClick={()=>handleBookmarks(blog_title)}><BsBookmarkStar /></button>
+                    <button onClick={()=>handleBookmarks(post)}><BsBookmarkStar /></button>
                 </div>
             </div>
             <div>
@@ -27,8 +27,12 @@ const Post = ({post, handleBookmarks, handleTime}) => {
                 }
             </div>
             <div className='text-blue-600 font-bold'>
-                <button onClick={()=>handleTime(reading_time)} className='underline'>Mark as read</button>
+                <button onClick={()=>{
+                    handleTime(reading_time)
+                    handleModify(id)
+                    }} className='underline'>Mark as read</button>
             </div>
+           
         </div>
     );
 };
@@ -36,6 +40,7 @@ const Post = ({post, handleBookmarks, handleTime}) => {
 Post.propTypes ={
     post:PropTypes.object,
     handleBookmarks: PropTypes.func,
-    handleTime: PropTypes.func
+    handleTime: PropTypes.func,
+    handleModify: PropTypes.func
 }
 export default Post;

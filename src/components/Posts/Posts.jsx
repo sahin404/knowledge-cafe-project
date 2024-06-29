@@ -3,7 +3,7 @@ import { useState } from "react";
 import Post from "../Post/Post";
 import PropTypes from 'prop-types';
 
-const Posts = ({handleBookmarks, handleTime}) => {
+const Posts = ({handleBookmarks, handleTime, handleModify}) => {
     const [posts, setPosts]= useState([]);
     useEffect(()=>{
         fetch('blogs.json')
@@ -19,6 +19,7 @@ const Posts = ({handleBookmarks, handleTime}) => {
                 post= {post}
                 handleBookmarks={handleBookmarks}
                 handleTime={handleTime} 
+                handleModify={handleModify}
                 ></Post>)
             }
         </div>
@@ -27,7 +28,8 @@ const Posts = ({handleBookmarks, handleTime}) => {
 
 Posts.propTypes={
     handleBookmarks: PropTypes.func,
-    handleTime: PropTypes.func
+    handleTime: PropTypes.func,
+    handleModify: PropTypes.func
 
 }
 
